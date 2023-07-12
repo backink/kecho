@@ -32,10 +32,10 @@ static int get_request(struct socket *sock, unsigned char *buf, size_t size)
      * TODO: during benchmarking, such printk() is useless and lead to worse
      * result. Add a specific build flag for these printk() would be good.
      */
-    printk(MODULE_NAME ": start get response\n");
+    printk(KERN_INFO MODULE_NAME ": start get response\n");
     /* get msg */
     length = kernel_recvmsg(sock, &msg, &vec, size, size, msg.msg_flags);
-    printk(MODULE_NAME ": get request = %s\n", buf);
+    printk(KERN_INFO MODULE_NAME ": get request = %s\n", buf);
 
     return length;
 }
@@ -55,11 +55,11 @@ static int send_request(struct socket *sock, unsigned char *buf, size_t size)
     vec.iov_base = buf;
     vec.iov_len = strlen(buf);
 
-    printk(MODULE_NAME ": start send request.\n");
+    printk(KERN_INFO MODULE_NAME ": start send request.\n");
 
     length = kernel_sendmsg(sock, &msg, &vec, 1, size);
 
-    printk(MODULE_NAME ": send request = %s\n", buf);
+    printk(KERN_INFO MODULE_NAME ": send request = %s\n", buf);
 
     return length;
 }
@@ -160,7 +160,7 @@ int echo_server_daemon(void *arg)
         queue_work(kecho_wq, work);
     }
 
-    printk(MODULE_NAME ": daemon shutdown in progress...\n");
+    printk(KERN_INFO MODULE_NAME ": daemon shutdown in progress...\n");
 
     daemon.is_stopped = true;
     free_work();

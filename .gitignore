@@ -56,3 +56,5 @@ dkms.conf
 
 # Other
 bench.txt
+.vscode/c_cpp_properties.json
+*.png

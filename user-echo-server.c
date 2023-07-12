@@ -157,7 +157,7 @@ int main(void)
         server_err("Fail to listen", &list);
 
     int epoll_fd;
-    if ((epoll_fd = epoll_create(EPOLL_SIZE)) < 0)
+    if ((epoll_fd = epoll_create1(0)) < 0)
         server_err("Fail to create epoll", &list);
 
     static struct epoll_event ev = {.events = EPOLLIN | EPOLLET};
