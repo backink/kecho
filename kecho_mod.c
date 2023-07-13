@@ -136,7 +136,7 @@ static int open_listen(struct socket **result)
         sock_release(sock);
         return error;
     }
-    printk(MODULE_NAME ": setsockopt ok....\n");
+    printk(KERN_INFO MODULE_NAME ": setsockopt ok....\n");
 
     /* set sockaddr_in */
     memset(&addr, 0, sizeof(addr));
@@ -151,7 +151,7 @@ static int open_listen(struct socket **result)
         sock_release(sock);
         return error;
     }
-    printk(MODULE_NAME ": socket bind ok....\n");
+    printk(KERN_INFO MODULE_NAME ": socket bind ok....\n");
 
     /* listen */
     error = kernel_listen(sock, backlog);
@@ -160,7 +160,7 @@ static int open_listen(struct socket **result)
         sock_release(sock);
         return error;
     }
-    printk(MODULE_NAME ": socket listen ok....\n");
+    printk(KERN_INFO MODULE_NAME ": socket listen ok....\n");
 
     *result = sock;
     return 0;
